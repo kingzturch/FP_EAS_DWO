@@ -50,13 +50,13 @@
                 <p class="mb-4">DASHBOARD RENTAL FILM SAKILA</p>
               </div>
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <p class="text-black">Username :</p>
+                <p style="color: black;">Username :</p>
                 <div class="form-group first">
                   <label for="username">Username</label>
                   <input type="text" class="form-control" id="username" name="username">
 
                 </div>
-                <p>Passsword :</p>
+                <p style="color: black;">Passsword :</p>
                 <div class="form-group last mb-4">
                   <label for="password">Password</label>
                   <input type="password" class="form-control" id="password" name="password">
@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <footer class="bg-body-tertiary text-center text-lg-start">
+  <footer class=" bg-body-tertiary text-center text-lg-start">
       <!-- Copyright -->
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
         © 2024 Copyright:
