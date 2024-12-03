@@ -1,14 +1,14 @@
-# FP_DWO_KELOMPOK_5
+# FP_DWO_KELOMPOK_3
 Final Project Pengembangan Data Warehouse dan Dashboard WHsakila2021<br/>
-Dibuat oleh Kelompok 5 <br/>
+Dibuat oleh Kelompok 3 <br/>
 Program Studi Sistem Informasi <br/>
 Fakultas Ilmu Komputer <br/>
 UPN "Veteran" Jawa Timur<br/>
 Nama Ketua :<br/>
-Ahmad Nashirul Haq (18082010028)<br/>
+Deva Naufal A. Y. (22082010054)<br/>
 Nama Anggota :<br/>
-Nur Hasan Assobarry (18082010007)<br/>
-Khusnia Nur Rachmah (18082010008)<br/>
+Javas Aryadinata (22082010057)<br/>
+Visnhu Arya Bhisma (22082010209)<br/>
 <br/>
 Langkah-langkah yang dibutuhkan untuk menjalankan app dengan baik :
 1. Install database server: MySql (disini kami menggunakan Xampp versi terbaru).
