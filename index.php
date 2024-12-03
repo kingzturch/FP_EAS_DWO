@@ -46,15 +46,17 @@
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="mb-4">
-                <h1>L o g i n</h1>
+                <h1>L O G I N</h1>
                 <p class="mb-4">DASHBOARD RENTAL FILM SAKILA</p>
               </div>
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <p class="text-black">Username :</p>
                 <div class="form-group first">
                   <label for="username">Username</label>
                   <input type="text" class="form-control" id="username" name="username">
 
                 </div>
+                <p>Passsword :</p>
                 <div class="form-group last mb-4">
                   <label for="password">Password</label>
                   <input type="password" class="form-control" id="password" name="password">
@@ -69,7 +71,7 @@
                 <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
               </div>
               -->
-                <input type="submit" value="Login" class="btn btn-block btn-dark">
+                <input type="submit" value="Login" class="btn btn-block btn-success">
                 <!--
               <span class="d-block text-left my-4 text-muted">&mdash; or login with &mdash;</span>
               
@@ -95,6 +97,14 @@
     </div>
   </div>
 
+  <footer class="bg-body-tertiary text-center text-lg-start">
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 Copyright:
+        <a class="text-body" href="">DWO Kelompok 3</a>
+      </div>
+      <!-- Copyright -->
+  </footer>
 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>

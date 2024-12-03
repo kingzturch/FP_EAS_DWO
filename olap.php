@@ -58,7 +58,7 @@ $data6 = json_decode($data6, TRUE);
                 </p>
                 <!-- /.container-fluid -->
                 <br>
-                <iframe name="mondrian" src="http://localhost:8080/mondrian/index_sakila.html"></iframe>
+                <iframe name="mondrian" src="http://localhost:8080/mondrian/index.html"></iframe>
                 <br>
             </div>
             <!-- End of Main Content -->
@@ -67,7 +67,7 @@ $data6 = json_decode($data6, TRUE);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard WHSakila2021</span>
+                        <span>Copyright &copy; Dashboard [nama] DWO Kelompok 3</span>
                     </div>
                 </div>
             </footer>

@@ -38,7 +38,7 @@
             <div id="content">
 
                 <!-- Begin Page Content -->
-                <h2>W e l c o m e !</h2>
+                <h2>W E L C O M E !</h2>
                 <p>Welcome to Dashboard Rental Film Sakila</p>
                 <p>Dashboard ini akan menampilkan beberapa grafik berdasarkan data rental film Sakila dan juga tampilan OLAP yang di integrasikan dengan Mondrian</p>
                
@@ -54,7 +54,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard WHSakila2021</span>
+                        <span>Copyright &copy; Dashboard [nama] DWO Kelompk 3</span>
                     </div>
                 </div>
             </footer>
