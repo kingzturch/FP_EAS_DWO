@@ -67,7 +67,7 @@ $data6 = json_decode($data6, TRUE);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard WHSakila2021</span>
+                        <span>Copyright &copy; Dashboard DWO Kelompok 3</span>
                     </div>
                 </div>
             </footer>
