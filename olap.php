@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard WHSakila2021</title>
+    <title>Dashboard ADVENTURE WORK</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
@@ -54,7 +54,7 @@ $data6 = json_decode($data6, TRUE);
             <div id="content">
                 <!-- Begin Page Content -->
                 <p class="highcharts-description">
-                Berikut merupakan tampilan OLAP dari rental film Sakila yang di integrasikan dengan Mondrian.
+                Berikut merupakan tampilan OLAP yang di integrasikan dengan Mondrian.
                 </p>
                 <!-- /.container-fluid -->
                 <br>

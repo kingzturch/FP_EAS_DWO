@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard WHSakila2021</title>
+    <title>Dashboard ADVENTURE WORK</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,8 +39,8 @@
 
                 <!-- Begin Page Content -->
                 <h2>W E L C O M E !</h2>
-                <p>Welcome to Dashboard Rental Film Sakila</p>
-                <p>Dashboard ini akan menampilkan beberapa grafik berdasarkan data rental film Sakila dan juga tampilan OLAP yang di integrasikan dengan Mondrian</p>
+                <p>Welcome to Dashboard ADVENTURE WORK</p>
+                <p>Dashboard ini akan menampilkan beberapa grafik berdasarkan data [NAMA] dan juga tampilan OLAP yang di integrasikan dengan Mondrian</p>
                
                 
                
@@ -54,7 +54,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard [nama] DWO Kelompk 3</span>
+                        <span>Copyright &copy; Dashboard DWO Kelompk 3</span>
                     </div>
                 </div>
             </footer>

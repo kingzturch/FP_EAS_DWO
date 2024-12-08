@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard WHSakila2021</title>
+    <title>Dashboard ADVENTURE WORK</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
@@ -66,7 +66,7 @@ $data3 = json_decode($data3, TRUE);
             <footer class="sticky-footer bg-white">
                 <div class="container my-0">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard [nama] DWO Kelompok 3</span>
+                        <span>Copyright &copy; Dashboard DWO Kelompok 3</span>
                     </div>
                 </div>
             </footer>
@@ -92,7 +92,7 @@ $data3 = json_decode($data3, TRUE);
                 text: 'Data Film Terlaris'
             },
             subtitle: {
-                text: 'Source: Database WHSakila2021'
+                text: 'Source: Database Adventure Work 2019'
             },
             xAxis: {
                 categories: [

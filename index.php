@@ -47,7 +47,7 @@
             <div class="col-md-8">
               <div class="mb-4">
                 <h1>L O G I N</h1>
-                <p class="mb-4">DASHBOARD RENTAL FILM SAKILA</p>
+                <p class="mb-4">DASHBOARD ADVENTURE WORK</p>
               </div>
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <p style="color: black;">Username :</p>

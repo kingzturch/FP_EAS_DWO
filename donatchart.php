@@ -94,7 +94,7 @@ $data6 = json_decode($data6, TRUE);
                 text: 'Data Pendapatan dari Setiap Kategori'
             },
             subtitle: {
-                text: 'Source: Database WHSakila2021'
+                text: 'Source: Database Adventure Work 2019'
             },
         
             accessibility: {

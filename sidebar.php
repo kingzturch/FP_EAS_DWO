@@ -6,7 +6,7 @@
          <div class="sidebar-brand-icon rotate-n-15">
          <i class="fas fa-film"></i>
          </div>
-         <div class="sidebar-brand-text mx-3">Sakila</div>
+         <div class="sidebar-brand-text mx-3">ADVENTURE WORK</div>
      </a>
 
      <!-- Divider -->
@@ -14,7 +14,7 @@
 
      <!-- Heading User Profile-->
      <div class="sidebar-heading">
-         Grafik Data Rental Film Sakila
+         Grafik Data ADVENTURE WORK
      </div>
 
      <!-- Nav Item - My Profile -->
