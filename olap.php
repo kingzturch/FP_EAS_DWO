@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard ADVENTURE WORK</title>
+    <title>Dashboard Adventure Work</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,41 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: fix;
+            flex-direction: column;
+        }
+        #wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: row; /* Sidebar dan konten sejajar horizontal */
+        }
+        #content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        iframe {
+            width: 100%;
+            height: calc(80vh - 80px); /* Kurangi untuk header dan footer */
+            border: none;
+        }
+        .sticky-footer {
+            height: 60px;
+        }
+        .sidebar {
+            min-width: 250px; /* Lebar minimum sidebar */
+            max-width: 250px;
+            background-color: #f8f9fc; /* Warna sidebar */
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body id="page-top">
