@@ -4,7 +4,7 @@
      <!-- Sidebar - Brand -->
      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
          <div class="sidebar-brand-icon rotate-n-15">
-         <i class="fas fa-film"></i>
+         <i class="fas fa-bicycle"></i>
          </div>
          <div class="sidebar-brand-text mx-3">ADVENTURE WORK</div>
      </a>
@@ -21,13 +21,13 @@
      <li class="nav-item">
          <a class="nav-link" href="linechart.php">
          <i class="fas fa-shopping-cart"></i>
-             <span>Data Film Terlaris</span></a>
+             <span>Data Barang Terlaris</span></a>
      </li>
 
      <li class="nav-item">
          <a class="nav-link" href="linechart2.php">
          <i class="far fa-clock"></i>
-             <span>Data Lama Pinjam Setiap Kategori Film</span></a>
+             <span>Data Bulanan Setiap Kategori</span></a>
      </li>
 
      <!-- Nav Item - Edit Profile -->

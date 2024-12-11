@@ -40,13 +40,13 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <img src="images/—Pngtree—movie filming props clapperboard film_5493444.png" alt="Image" class="img-fluid">
+          <img src="images/logo.jpg" alt="Image" class="img-fluid">
         </div>
         <div class="col-md-6 contents">
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="mb-4">
-                <h1>L O G I N</h1>
+                <h1><b>L O G I N</b></h1>
                 <p class="mb-4">DASHBOARD ADVENTURE WORK</p>
               </div>
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

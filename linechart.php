@@ -86,46 +86,49 @@ $data3 = json_decode($data3, TRUE);
         //create linechart
         Highcharts.chart('linechart', {
             chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Data Film Terlaris'
-            },
-            subtitle: {
-                text: 'Source: Database Adventure Work 2019'
-            },
-            xAxis: {
-                categories: [
-                    <?php for ($i=0; $i < count($data3); $i++):?>
-                        <?= $data3[$i]["bulan"]; ?>,
-                    <?php endfor;?>
-                ]
-            },
-            yAxis: {
-                title: {
-                    text: 'Banyaknya sewa'
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: false
-                }
-            },
-            series: [
-                <?php for ($i=0; $i < count($data3); $i+=5):?>
-                {
-                name: '<?= $data3[$i]["kategori"]; ?>',
-                data: [
-                    <?php for ($a=$i; $a < $i+5; $a++):?>
-                        <?= $data3[$a]["pendapatan"]; ?>,
-                    <?php endfor;?>
-                    ]
-                },
-                <?php endfor;?>
+            type: 'line'
+        },
+        title: {
+            text: 'Jumlah Produk Terjual per Kategori'
+        },
+        subtitle: {
+            text: 'Source: Database AdventureWorks'
+        },
+        xAxis: {
+            categories: [
+                <?php for ($i = 0; $i < count($data3); $i++): ?>
+                    '<?= $data3[$i]["bulan"]; ?>',
+                <?php endfor; ?>
             ]
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah Produk Terjual'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        series: [
+            <?php 
+            // Mengelompokkan data berdasarkan kategori
+            $categories = [];
+            foreach ($data3 as $data) {
+                $categories[$data['kategori']][] = $data['jumlah'];
+            }
+
+            foreach ($categories as $kategori => $jumlahList): ?>
+                {
+                    name: '<?= $kategori; ?>',
+                    data: [<?= implode(',', $jumlahList); ?>]
+                },
+            <?php endforeach; ?>
+        ]
         });
     </script>
     <!-- Bootstrap core JavaScript-->
