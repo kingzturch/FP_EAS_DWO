@@ -1,70 +1,57 @@
 <?php
 require('koneksi.php');
 
-$sql1 = "SELECT f.kategori kategori, 
-        t.bulan as bulan,
-       sum(fp.amount) as pendapatan 
-    FROM film f, fakta_pendapatan fp, time t 
-WHERE (f.film_id = fp.film_id) AND (t.time_id = fp.time_id) 
-GROUP BY kategori, bulan";
+$sql1 = "SELECT p.productcategory, 
+                t.bulan, 
+                SUM(fp.SalesAmount) AS pendapatan
+         FROM dimproduct p
+         JOIN factsales fp ON p.productID = fp.productID
+         JOIN dimtime t ON fp.timeID = t.timeID
+         GROUP BY p.productcategory, t.bulan";
 
-$sql2 = "SELECT f.kategori kategori, 
-                sum(fp.amount) as pembagi 
-                FROM film f 
-                JOIN fakta_pendapatan fp 
-                ON (f.film_id = fp.film_id) 
-                GROUP BY kategori";
+$sql2 = "SELECT p.productcategory, 
+                SUM(fp.SalesAmount) AS pembagi
+         FROM dimproduct p
+         JOIN factsales fp ON p.productID = fp.productID
+         GROUP BY p.productcategory";
 
-$result1 = mysqli_query($conn,$sql1);
-$result2 = mysqli_query($conn,$sql2);
+$result1 = mysqli_query($conn, $sql1);
+$result2 = mysqli_query($conn, $sql2);
 
 $pendapatan = array();
 $pembagi = array();
 
 while ($row = mysqli_fetch_array($result1)) {
-    array_push($pendapatan,array(
-        "pendapatan"=>$row['pendapatan'],
+    array_push($pendapatan, array(
+        "pendapatan" => $row['pendapatan'],
         "bulan" => $row['bulan'],
-        "kategori" => $row['kategori']
+        "kategori" => $row['productcategory']
     ));
 }
 
 while ($row = mysqli_fetch_array($result2)) {
-    array_push($pembagi,array(
-        "kategori" => $row['kategori'],
-        "pembagi"=>$row['pembagi']
+    array_push($pembagi, array(
+        "kategori" => $row['productcategory'],
+        "pembagi" => $row['pembagi']
     ));
 }
 
-$arrayLength2 = count($pembagi);
-$arrayLength = count($pendapatan);
-
-$a = 0;
-$i = 0;
-$hasil = array();
-
-function countPersen($nilai, $pembagi){
-
-    return $nilai/$pembagi*100;
+function countPersen($nilai, $pembagi) {
+    return $nilai / $pembagi * 100;
 }
 
 $hasil = array();
 foreach ($pembagi as $item) {
     foreach ($pendapatan as $dapat) {
-        if ($item["kategori"]==$dapat["kategori"]){
-            array_push($hasil,array(
+        if ($item["kategori"] == $dapat["kategori"]) {
+            array_push($hasil, array(
                 "kategori" => $dapat['kategori'],
                 "persen" => countPersen(floatval($dapat["pendapatan"]), floatval($item["pembagi"])),
                 "bulan" => $dapat['bulan']
             ));
-
         }
-
-        $i++;
     }
-
 }
 
 $data6 = json_encode($hasil);
-
 ?>

@@ -91,78 +91,74 @@ $data2 = json_decode($data2, TRUE);
     // Create the barchart
         Highcharts.chart('barchart', {
             chart: {
-                type: 'column'
-            },
+            type: 'column'
+        },
+        title: {
+            text: 'Pendapatan Setiap Toko'
+        },
+        subtitle: {
+            text: 'Source: Database advuas.sql'
+        },
+        xAxis: {
+            type: 'category',
             title: {
-                text: 'Data Pendapatan Toko Menurut Kota'
-            },
-            subtitle: {
-                text: 'Source: Database Adventure Work 2019'
-            },
-            accessibility: {
-                announceNewData: {
-                    enabled: true
+                text: 'Nama Toko'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Pendapatan (USD)'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.2f}$'
                 }
-            },
-            xAxis: {
-                type: 'category'
-            },
-            yAxis: {
-                title: {
-                    text: 'Pendapatan'
-                }
-            
-            },
-            legend: {
-                enabled: false
-            },
-            plotOptions: {
-                series: {
-                    borderWidth: 0,
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.y:.1f}$'
-                    }
-                }
-            },
-        
-            tooltip: {
-                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b> of total<br/>'
-            },
-        
-            series: [
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>'
+        },
+        series: [{
+            name: "Toko",
+            colorByPoint: true,
+            data: [
+                <?php foreach (json_decode($data, TRUE) as $toko): ?>
                 {
-                    name: "Kategori",
-                    colorByPoint: true,
-                    data: [
-                        <?php foreach ($data as $data):?>
-                        {
-                            name: '<?= $data["name"]; ?>',
-                            y: <?= $data["total"]; ?>,
-                            drilldown: '<?= $data["name"]; ?>'
-                        },
-                        <?php endforeach;?>
-                    ]
+                    name: '<?= $toko["name"]; ?>',
+                    y: <?= $toko["total"]; ?>,
+                    drilldown: '<?= $toko["name"]; ?>'
+                },
+                <?php endforeach; ?>
+            ]
+        }],
+        drilldown: {
+            series: [
+                <?php 
+                $data2 = json_decode($data2, TRUE);
+                $drilldown = [];
+
+                // Mengelompokkan data drilldown per toko
+                foreach ($data2 as $item) {
+                    $drilldown[$item['kategori']][] = [$item['bulan'], floatval($item['pendapatan'])];
                 }
-            ],
-            drilldown: {
-                series: [
-                    <?php for ($i=0; $i < count($data2); $i+=5):?>
-                    {
-                        name: "<?= $data2[$i]["kategori"]; ?>",
-                        id: "<?= $data2[$i]["kategori"]; ?>",
-                        data: [
-                            <?php for ($a=$i; $a < $i+5; $a++):?>
-                            [
-                                "<?= $data2[$a]["bulan"]; ?>",
-                                <?= floatval($data2[$a]["pendapatan"]); ?>
-                            ],
-                            <?php endfor;?>
-                        ]
-                    },
-                    <?php endfor;?>
-                ]}
+
+                foreach ($drilldown as $toko => $data): ?>
+                {
+                    name: "<?= $toko; ?>",
+                    id: "<?= $toko; ?>",
+                    data: <?= json_encode($data); ?>
+                },
+                <?php endforeach; ?>
+            ]
+        }
         });
     </script>
     <!-- Bootstrap core JavaScript-->

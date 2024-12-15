@@ -88,70 +88,64 @@ $data6 = json_decode($data6, TRUE);
         //create linechart
         Highcharts.chart('container', {
             chart: {
-                type: 'pie'
-            },
-            title: {
-                text: 'Data Pendapatan dari Setiap Kategori'
-            },
-            subtitle: {
-                text: 'Source: Database Adventure Work 2019'
-            },
-        
-            accessibility: {
-                announceNewData: {
-                    enabled: true
-                },
-                point: {
-                    valueSuffix: '%'
+            type: 'pie'
+        },
+        title: {
+            text: 'Data Pendapatan Tiap Kategori Produk'
+        },
+        subtitle: {
+            text: 'Source: Database advuas.sql'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y:.1f}%'
                 }
-            },
-        
-            plotOptions: {
-                series: {
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.name}: {point.y:.1f}%'
-                    }
-                }
-            },
-        
-            tooltip: {
-                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-            },
-        
-            series: [
-                {
-                    name: "Kategori",
-                    colorByPoint: true,
-                    data: [
-                        <?php foreach ($data5 as $data):?>
-                        {
-                            name: '<?= $data["name"]; ?>',
-                            y: <?= $data["y"]; ?>,
-                            drilldown: '<?= $data["name"]; ?>'
-                        },
-                        <?php endforeach;?>
-                    ]
-                }
-            ],
-            drilldown: {
-                series: [
-                    <?php for ($i=0; $i < count($data6); $i+=5):?>
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> dari total<br/>'
+        },
+        series: [
+            {
+                name: "Kategori",
+                colorByPoint: true,
+                data: [
+                    <?php foreach ($data5 as $data): ?>
                     {
-                        name: "<?= $data6[$i]["kategori"]; ?>",
-                        id: "<?= $data6[$i]["kategori"]; ?>",
-                        data: [
-                            <?php for ($a=$i; $a < $i+5; $a++):?>
-                            [
-                                "<?= $data6[$a]["bulan"]; ?>",
-                                <?= floatval($data6[$a]["persen"]); ?>
-                            ],
-                            <?php endfor;?>
-                        ]
+                        name: '<?= $data["name"]; ?>',
+                        y: <?= $data["y"]; ?>,
+                        drilldown: '<?= $data["name"]; ?>'
                     },
-                    <?php endfor;?>
-                ]}
+                    <?php endforeach; ?>
+                ]
+            }
+        ],
+        drilldown: {
+            series: [
+                <?php for ($i = 0; $i < count($data6); $i += 5): ?>
+                {
+                    name: "<?= $data6[$i]["kategori"]; ?>",
+                    id: "<?= $data6[$i]["kategori"]; ?>",
+                    data: [
+                        <?php for ($a = $i; $a < $i + 5; $a++): ?>
+                        [
+                            "<?= $data6[$a]["bulan"]; ?>",
+                            <?= floatval($data6[$a]["persen"]); ?>
+                        ],
+                        <?php endfor; ?>
+                    ]
+                },
+                <?php endfor; ?>
+            ]
+        }
         });
     </script>
     <!-- Bootstrap core JavaScript-->

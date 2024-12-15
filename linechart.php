@@ -56,7 +56,7 @@ $data3 = json_decode($data3, TRUE);
                 
                 <div id="linechart" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan film terlaris pada rental film Sakila.
+                Berikut merupakan grafik untuk menampilkan produk terlaris pada Adventure Work.
                 </p>
                 <!-- /.container-fluid -->
             </div>
@@ -86,49 +86,29 @@ $data3 = json_decode($data3, TRUE);
         //create linechart
         Highcharts.chart('linechart', {
             chart: {
-            type: 'line'
-        },
-        title: {
-            text: 'Jumlah Produk Terjual per Kategori'
-        },
-        subtitle: {
-            text: 'Source: Database AdventureWorks'
-        },
-        xAxis: {
-            categories: [
-                <?php for ($i = 0; $i < count($data3); $i++): ?>
-                    '<?= $data3[$i]["bulan"]; ?>',
-                <?php endfor; ?>
-            ]
-        },
-        yAxis: {
+                type: 'bar'  // Jenis grafik yang akan digunakan
+            },
             title: {
-                text: 'Jumlah Produk Terjual'
-            }
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
-                enableMouseTracking: true
-            }
-        },
-        series: [
-            <?php 
-            // Mengelompokkan data berdasarkan kategori
-            $categories = [];
-            foreach ($data3 as $data) {
-                $categories[$data['kategori']][] = $data['jumlah'];
-            }
-
-            foreach ($categories as $kategori => $jumlahList): ?>
-                {
-                    name: '<?= $kategori; ?>',
-                    data: [<?= implode(',', $jumlahList); ?>]
-                },
-            <?php endforeach; ?>
-        ]
+                text: 'Barang Terlaris'  // Judul grafik
+            },
+            subtitle: {
+                text: 'Source: Database advuas'
+            },
+            xAxis: {
+                categories: <?php echo json_encode(array_column($data3, 'barang')); ?>,  // Nama produk untuk kategori sumbu X
+                title: {
+                    text: 'Nama Barang'  // Nama sumbu X
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Jumlah Terjual'  // Nama sumbu Y
+                }
+            },
+            series: [{
+                name: 'Jumlah Terjual',
+                data: <?php echo json_encode(array_column($data3, 'jumlah')); ?>  // Data jumlah penjualan
+            }]
         });
     </script>
     <!-- Bootstrap core JavaScript-->

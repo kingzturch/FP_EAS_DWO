@@ -2,27 +2,27 @@
 require('koneksi.php');
 
 // Query untuk mengambil data kategori produk terlaris per bulan
-$sql1 = "SELECT dp.ProductCategory AS kategori,
-           dt.Bulan AS bulan,
-           SUM(fs.QuantitySold) AS jumlah
-    FROM factsales fs
-    JOIN dimtime dt ON fs.TimeID = dt.TimeID
-    JOIN dimproduct dp ON fs.ProductID = dp.ProductID
-    GROUP BY dp.ProductCategory, dt.Bulan
-    ORDER BY dp.ProductCategory, dt.Bulan;
-";
+$sql1 = "SELECT dp.productname AS barang, 
+                COUNT(fp.productID) AS jumlah
+         FROM factsales fp
+         JOIN dimproduct dp ON fp.productID = dp.productID
+         GROUP BY dp.productname
+         ORDER BY jumlah DESC";
 
+// Eksekusi query
 $result1 = mysqli_query($conn, $sql1);
 
-$pendapatan = array();
+// Array untuk menampung data
+$barangTerlaris = array();
 
+// Mengambil data dari hasil query
 while ($row = mysqli_fetch_array($result1)) {
-    array_push($pendapatan, array(
-        "jumlah" => $row['jumlah'],
-        "bulan" => $row['bulan'],
-        "kategori" => $row['kategori']
+    array_push($barangTerlaris, array(
+        "barang" => $row['barang'],
+        "jumlah" => $row['jumlah']
     ));
 }
 
-$data3 = json_encode($pendapatan);
+// Mengencode hasil ke format JSON
+$data3 = json_encode($barangTerlaris);
 ?>

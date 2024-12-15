@@ -86,46 +86,53 @@ $data7 = json_decode($data7, TRUE);
         //create linechart
         Highcharts.chart('linechart', {
             chart: {
-                type: 'line'
-            },
+            type: 'line'
+        },
+        title: {
+            text: 'Data Penjualan Setiap Kategori Produk'
+        },
+        subtitle: {
+            text: 'Source: Database advuas'
+        },
+        xAxis: {
+            categories: [
+                <?php foreach (json_decode($data7, TRUE) as $item): ?>
+                    '<?= $item["bulan"]; ?>',
+                <?php endforeach; ?>
+            ],
             title: {
-                text: 'Data Lama Pinjam Setiap Kategori Film'
-            },
-            subtitle: {
-                text: 'Source: Database Adventure Work 2019'
-            },
-            xAxis: {
-                categories: [
-                    <?php for ($i=0; $i < count($data7); $i++):?>
-                        <?= $data7[$i]["bulan"]; ?>,
-                    <?php endfor;?>
-                ]
-            },
-            yAxis: {
-                title: {
-                    text: 'pinjaman hari ke-'
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: false
-                }
-            },
-            series: [
-                <?php for ($i=0; $i < count($data7); $i+=5):?>
-                {
-                name: '<?= $data7[$i]["kategori"]; ?>',
-                data: [
-                    <?php for ($a=$i; $a < $i+5; $a++):?>
-                        <?= $data7[$a]["lamapinjam"]; ?>,
-                    <?php endfor;?>
-                    ]
+                text: 'Bulan'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah Penjualan'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
                 },
-                <?php endfor;?>
-            ]
+                enableMouseTracking: true
+            }
+        },
+        series: [
+            <?php 
+            // Mengelompokkan data berdasarkan kategori
+            $dataDecoded = json_decode($data7, TRUE);
+            $categories = [];
+            foreach ($dataDecoded as $data) {
+                $categories[$data['kategori']][] = $data['penjualan'];
+            }
+
+            foreach ($categories as $kategori => $penjualanList): ?>
+                {
+                    name: '<?= $kategori; ?>',
+                    data: [<?= implode(',', $penjualanList); ?>]
+                },
+            <?php endforeach; ?>
+        ]
         });
     </script>
     <!-- Bootstrap core JavaScript-->

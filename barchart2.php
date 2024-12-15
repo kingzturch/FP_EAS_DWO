@@ -88,56 +88,53 @@ $data4 = json_decode($data4, TRUE);
         // Create barchart2
         Highcharts.chart('barchart2', {
             chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Data Jumlah Customer dari Setiap Kategori'
-            },
-            subtitle: {
-                text: 'Source: Database Adventure Work 2019'
-            },
-            xAxis: {
-                categories: [
-                    <?php for ($i=0; $i < 5; $i++):?>
-                        '<?= $data4[$i]["bulan"]; ?>',
-                    <?php endfor;?>
+            type: 'column'
+        },
+        title: {
+            text: 'Jumlah Pelanggan dari Setiap Kategori Film'
+        },
+        subtitle: {
+            text: 'Source: Database advuas.sql'
+        },
+        xAxis: {
+            categories: [
+                <?php foreach (json_decode($data4, TRUE) as $kategori): ?>
+                    '<?= $kategori["kategori"]; ?>',
+                <?php endforeach; ?>
             ],
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Customer'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.f} orang</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-                series: [
-                    <?php for ($i=0; $i < count($data4); $i+=5):?>
-                    {
-                        name: '<?= $data4[$i]["kategori"]; ?>',
-                        data: [
-                            <?php for ($a=$i; $a < $i+5; $a++):?>
-                            [
-                                <?= intval($data4[$a]["pelanggan"]); ?>,
-                            ],
-                            <?php endfor;?>
-                        ]
-                    },
-                    <?php endfor;?>
-                    ]
+            crosshair: true,
+            title: {
+                text: 'Kategori Film'
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Jumlah Pelanggan (orang)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y} orang</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Jumlah Pelanggan',
+            data: [
+                <?php foreach (json_decode($data4, TRUE) as $kategori): ?>
+                    <?= $kategori["pelanggan"]; ?>,
+                <?php endforeach; ?>
+            ]
+        }]
         });
     </script>
     <!-- Bootstrap core JavaScript-->
