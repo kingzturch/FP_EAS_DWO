@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/styleGraph.css">
 
-    
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
@@ -39,7 +38,6 @@ include 'data2.php';
 
 $data = json_decode($data, TRUE);
 $data2 = json_decode($data2, TRUE);
-
 ?>
 
     <!-- Page Wrapper -->
@@ -56,10 +54,9 @@ $data2 = json_decode($data2, TRUE);
             <div id="content">
 
                 <!-- Begin Page Content -->
-                
                 <div id="barchart" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan pendapatan dari setiap Toko berdasarkan nama kota pada rental film Sakila.
+                Berikut merupakan grafik untuk menampilkan pendapatan dari setiap Toko berdasarkan nama kota.
                 </p>
                 <!-- /.container-fluid -->
 
@@ -91,76 +88,76 @@ $data2 = json_decode($data2, TRUE);
     // Create the barchart
         Highcharts.chart('barchart', {
             chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Pendapatan Setiap Toko'
-        },
-        subtitle: {
-            text: 'Source: Database advuas.sql'
-        },
-        xAxis: {
-            type: 'category',
+                type: 'column'
+            },
             title: {
-                text: 'Nama Toko'
-            }
-        },
-        yAxis: {
-            title: {
-                text: 'Pendapatan (USD)'
-            }
-        },
-        legend: {
-            enabled: false
-        },
-        plotOptions: {
-            series: {
-                borderWidth: 0,
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.y:.2f}$'
+                text: 'Pendapatan Setiap Toko'
+            },
+            subtitle: {
+                text: 'Source: Database advuas.sql'
+            },
+            xAxis: {
+                type: 'category',
+                title: {
+                    text: 'Nama Toko'
                 }
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>'
-        },
-        series: [{
-            name: "Toko",
-            colorByPoint: true,
-            data: [
-                <?php foreach (json_decode($data, TRUE) as $toko): ?>
-                {
-                    name: '<?= $toko["name"]; ?>',
-                    y: <?= $toko["total"]; ?>,
-                    drilldown: '<?= $toko["name"]; ?>'
-                },
-                <?php endforeach; ?>
-            ]
-        }],
-        drilldown: {
-            series: [
-                <?php 
-                $data2 = json_decode($data2, TRUE);
-                $drilldown = [];
-
-                // Mengelompokkan data drilldown per toko
-                foreach ($data2 as $item) {
-                    $drilldown[$item['kategori']][] = [$item['bulan'], floatval($item['pendapatan'])];
+            },
+            yAxis: {
+                title: {
+                    text: 'Pendapatan (USD)'
                 }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.2f}$'
+                    }
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>'
+            },
+            series: [{
+                name: "Toko",
+                colorByPoint: true,
+                data: [
+                    <?php foreach ($data as $toko): ?>
+                    {
+                        name: '<?= $toko["name"] ?>',
+                        y: <?= $toko["total"] ?>,
+                        drilldown: '<?= $toko["name"] ?>'
+                    },
+                    <?php endforeach; ?>
+                ]
+            }],
+            drilldown: {
+                series: [
+                    <?php 
+                    $drilldown = [];
 
-                foreach ($drilldown as $toko => $data): ?>
-                {
-                    name: "<?= $toko; ?>",
-                    id: "<?= $toko; ?>",
-                    data: <?= json_encode($data); ?>
-                },
-                <?php endforeach; ?>
-            ]
-        }
+                    // Mengelompokkan data drilldown per toko
+                    foreach ($data2 as $item) {
+                        $drilldown[$item['kategori']][] = [$item['bulan'], floatval($item['pendapatan'])];
+                    }
+
+                    foreach ($drilldown as $toko => $data): ?>
+                    {
+                        name: "<?= $toko ?>",
+                        id: "<?= $toko ?>",
+                        data: <?= json_encode($data) ?>
+                    },
+                    <?php endforeach; ?>
+                ]
+            }
         });
     </script>
+
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
@@ -170,7 +167,6 @@ $data2 = json_decode($data2, TRUE);
 
     <!-- Custom scripts for all pages-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/js/sb-admin-2.min.js"></script>
-
 
 </body>
 

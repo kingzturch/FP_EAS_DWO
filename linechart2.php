@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,24 +25,21 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
 </head>
 
 <body id="page-top">
 
 <?php 
-//data barchart
+// Mengambil data dari data7.php
 include 'data7.php';
-
 $data7 = json_decode($data7, TRUE);
-
 ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include "sidebar.php";?>
+        <?php include "sidebar.php"; ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -53,10 +49,9 @@ $data7 = json_decode($data7, TRUE);
             <div id="content">
 
                 <!-- Begin Page Content -->
-                
                 <div id="linechart" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan durasi lama pinjam film setiap kategori pada rental film Sakila.
+                    Berikut merupakan grafik untuk menampilkan data penjualan setiap kategori.
                 </p>
                 <!-- /.container-fluid -->
             </div>
@@ -81,60 +76,62 @@ $data7 = json_decode($data7, TRUE);
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
+    </a>
 
+    <!-- Script untuk membuat line chart -->
     <script type="text/javascript">
-        //create linechart
+        // Membuat line chart
         Highcharts.chart('linechart', {
             chart: {
-            type: 'line'
-        },
-        title: {
-            text: 'Data Penjualan Setiap Kategori Produk'
-        },
-        subtitle: {
-            text: 'Source: Database advuas'
-        },
-        xAxis: {
-            categories: [
-                <?php foreach (json_decode($data7, TRUE) as $item): ?>
-                    '<?= $item["bulan"]; ?>',
-                <?php endforeach; ?>
-            ],
+                type: 'line'
+            },
             title: {
-                text: 'Bulan'
-            }
-        },
-        yAxis: {
-            title: {
-                text: 'Jumlah Penjualan'
-            }
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
-                enableMouseTracking: true
-            }
-        },
-        series: [
-            <?php 
-            // Mengelompokkan data berdasarkan kategori
-            $dataDecoded = json_decode($data7, TRUE);
-            $categories = [];
-            foreach ($dataDecoded as $data) {
-                $categories[$data['kategori']][] = $data['penjualan'];
-            }
+                text: 'Data Penjualan Setiap Kategori Produk'
+            },
+            subtitle: {
+                text: 'Source: Database advuas'
+            },
+            xAxis: {
+                categories: [
+                    <?php foreach ($data7 as $item): ?>
+                        '<?= $item["bulan"] ?>',
+                    <?php endforeach; ?>
+                ],
+                title: {
+                    text: 'Bulan'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Jumlah Penjualan'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: true
+                }
+            },
+            series: [
+                <?php 
+                // Mengelompokkan data berdasarkan kategori
+                $categories = [];
+                foreach ($data7 as $data) {
+                    $categories[$data['kategori']][] = $data['penjualan'];
+                }
 
-            foreach ($categories as $kategori => $penjualanList): ?>
-                {
-                    name: '<?= $kategori; ?>',
-                    data: [<?= implode(',', $penjualanList); ?>]
-                },
-            <?php endforeach; ?>
-        ]
+                foreach ($categories as $kategori => $penjualanList): ?>
+                    {
+                        name: '<?= $kategori ?>',
+                        data: [<?= implode(',', $penjualanList) ?>]
+                    },
+                <?php endforeach; ?>
+            ]
         });
     </script>
+
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
@@ -144,7 +141,6 @@ $data7 = json_decode($data7, TRUE);
 
     <!-- Custom scripts for all pages-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/js/sb-admin-2.min.js"></script>
-
 
 </body>
 

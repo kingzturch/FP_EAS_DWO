@@ -19,7 +19,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/styleGraph.css">
-    
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
@@ -32,18 +32,17 @@
 <body id="page-top">
 
 <?php 
-//data barchart
+// Mengambil data dari file PHP
 include 'data4.php';
 
 $data4 = json_decode($data4, TRUE);
-
 ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include "sidebar.php";?>
+        <?php include "sidebar.php"; ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -56,7 +55,7 @@ $data4 = json_decode($data4, TRUE);
                 
                 <div id="barchart2" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan data jumlah customer dari setiap kategori film pada rental film Sakila.
+                Berikut merupakan grafik untuk menampilkan data jumlah customer dari setiap kategori.
                 </p>
                 <!-- /.container-fluid -->
 
@@ -85,58 +84,57 @@ $data4 = json_decode($data4, TRUE);
     </a>
 
     <script type="text/javascript">
-        // Create barchart2
+        // Validasi data sebelum digunakan
+        const data4 = <?php echo json_encode($data4); ?>;
+
+        const categories = data4.map(item => item.kategori);
+        const pelanggan = data4.map(item => parseInt(item.pelanggan));
+
+        // Render Barchart dengan Highcharts
         Highcharts.chart('barchart2', {
             chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Jumlah Pelanggan dari Setiap Kategori Film'
-        },
-        subtitle: {
-            text: 'Source: Database advuas.sql'
-        },
-        xAxis: {
-            categories: [
-                <?php foreach (json_decode($data4, TRUE) as $kategori): ?>
-                    '<?= $kategori["kategori"]; ?>',
-                <?php endforeach; ?>
-            ],
-            crosshair: true,
+                type: 'column'
+            },
             title: {
-                text: 'Kategori Film'
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Jumlah Pelanggan (orang)'
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y} orang</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        series: [{
-            name: 'Jumlah Pelanggan',
-            data: [
-                <?php foreach (json_decode($data4, TRUE) as $kategori): ?>
-                    <?= $kategori["pelanggan"]; ?>,
-                <?php endforeach; ?>
-            ]
-        }]
+                text: 'Jumlah Pelanggan dari Setiap Kategori Film'
+            },
+            subtitle: {
+                text: 'Source: Database advuas.sql'
+            },
+            xAxis: {
+                categories: categories,
+                crosshair: true,
+                title: {
+                    text: 'Kategori Film'
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Jumlah Pelanggan (orang)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y} orang</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Jumlah Pelanggan',
+                data: pelanggan
+            }]
         });
     </script>
+
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
@@ -146,7 +144,6 @@ $data4 = json_decode($data4, TRUE);
 
     <!-- Custom scripts for all pages-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/js/sb-admin-2.min.js"></script>
-
 
 </body>
 

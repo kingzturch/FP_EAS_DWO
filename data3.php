@@ -1,7 +1,12 @@
 <?php
 require('koneksi.php');
 
-// Query untuk mengambil data kategori produk terlaris per bulan
+// Periksa koneksi
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Query untuk mengambil data kategori produk terlaris
 $sql1 = "SELECT dp.productname AS barang, 
                 COUNT(fp.productID) AS jumlah
          FROM factsales fp
@@ -9,18 +14,26 @@ $sql1 = "SELECT dp.productname AS barang,
          GROUP BY dp.productname
          ORDER BY jumlah DESC";
 
-// Eksekusi query
 $result1 = mysqli_query($conn, $sql1);
+
+// Periksa hasil query
+if (!$result1) {
+    die("Query failed: " . mysqli_error($conn));
+}
 
 // Array untuk menampung data
 $barangTerlaris = array();
 
-// Mengambil data dari hasil query
-while ($row = mysqli_fetch_array($result1)) {
-    array_push($barangTerlaris, array(
-        "barang" => $row['barang'],
-        "jumlah" => $row['jumlah']
-    ));
+if (mysqli_num_rows($result1) > 0) {
+    // Mengambil data dari hasil query
+    while ($row = mysqli_fetch_array($result1)) {
+        $barangTerlaris[] = array(
+            "barang" => $row['barang'],
+            "jumlah" => (int)$row['jumlah'] // Cast ke integer untuk Highcharts
+        );
+    }
+} else {
+    echo "No data found.";
 }
 
 // Mengencode hasil ke format JSON

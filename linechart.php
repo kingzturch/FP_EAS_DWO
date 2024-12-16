@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,24 +25,21 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
 </head>
 
 <body id="page-top">
 
 <?php 
-//data barchart
+// Mengambil data dari data3.php
 include 'data3.php';
-
 $data3 = json_decode($data3, TRUE);
-
 ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include "sidebar.php";?>
+        <?php include "sidebar.php"; ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -53,10 +49,9 @@ $data3 = json_decode($data3, TRUE);
             <div id="content">
 
                 <!-- Begin Page Content -->
-                
                 <div id="linechart" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan produk terlaris pada Adventure Work.
+                    Berikut merupakan grafik untuk menampilkan produk terlaris pada Adventure Work.
                 </p>
                 <!-- /.container-fluid -->
             </div>
@@ -81,36 +76,42 @@ $data3 = json_decode($data3, TRUE);
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
+    </a>
 
+    <!-- Script untuk membuat line chart -->
     <script type="text/javascript">
-        //create linechart
+        // Membuat line chart
         Highcharts.chart('linechart', {
             chart: {
-                type: 'bar'  // Jenis grafik yang akan digunakan
+                type: 'line' // Jenis grafik line
             },
             title: {
-                text: 'Barang Terlaris'  // Judul grafik
+                text: 'Barang Terlaris' // Judul grafik
             },
             subtitle: {
-                text: 'Source: Database advuas'
+                text: 'Source: Database advuas' // Sumber data
             },
             xAxis: {
-                categories: <?php echo json_encode(array_column($data3, 'barang')); ?>,  // Nama produk untuk kategori sumbu X
+                categories: <?php echo json_encode(array_column($data3, 'barang')); ?>, // Nama produk untuk kategori sumbu X
                 title: {
-                    text: 'Nama Barang'  // Nama sumbu X
+                    text: 'Nama Barang' // Nama sumbu X
                 }
             },
             yAxis: {
                 title: {
-                    text: 'Jumlah Terjual'  // Nama sumbu Y
+                    text: 'Jumlah Terjual' // Nama sumbu Y
                 }
+            },
+            tooltip: {
+                valueSuffix: ' unit' // Satuan yang ditampilkan di tooltip
             },
             series: [{
                 name: 'Jumlah Terjual',
-                data: <?php echo json_encode(array_column($data3, 'jumlah')); ?>  // Data jumlah penjualan
+                data: <?php echo json_encode(array_column($data3, 'jumlah')); ?> // Data jumlah penjualan
             }]
         });
     </script>
+
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
@@ -120,7 +121,6 @@ $data3 = json_decode($data3, TRUE);
 
     <!-- Custom scripts for all pages-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/js/sb-admin-2.min.js"></script>
-
 
 </body>
 
