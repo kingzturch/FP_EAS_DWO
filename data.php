@@ -1,10 +1,10 @@
 <?php
-require('koneksi.php');
+require 'koneksi.php';
 
-$sql = "SELECT s.teritoryname AS nama_toko, 
+$sql = "SELECT s.teritoryname AS nama_toko,
                SUM(fp.SalesAmount) AS total_pendapatan
         FROM dimsalesterritory s
-        JOIN factsales fp ON s.teritoryid = fp.teritoryid
+        JOIN factsales fp ON s.teritoryid = fp.TerritoryID
         GROUP BY s.teritoryname
         ORDER BY total_pendapatan DESC";
 
@@ -14,10 +14,9 @@ $hasil = array();
 
 while ($row = mysqli_fetch_array($result)) {
     array_push($hasil, array(
-        "name" => $row['teritoryname'],
-        "total" => $row['total_pendapatan']
+        "name" => $row['nama_toko'],
+        "total" => $row['total_pendapatan'],
     ));
 }
 
 $data = json_encode($hasil);
-?>
