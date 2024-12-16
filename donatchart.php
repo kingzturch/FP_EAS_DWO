@@ -101,7 +101,7 @@ $data4 = json_decode($data4, TRUE);
                 text: 'Jumlah Pelanggan dari Setiap Kategori Film'
             },
             subtitle: {
-                text: 'Source: Database advuas.sql'
+                text: 'Source: Database advuas'
             },
             accessibility: {
                 point: {

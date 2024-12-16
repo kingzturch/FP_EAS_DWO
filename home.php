@@ -40,7 +40,7 @@
                 <!-- Begin Page Content -->
                 <h2>W E L C O M E !</h2>
                 <p>Welcome to Dashboard ADVENTURE WORK</p>
-                <p>Dashboard ini akan menampilkan beberapa grafik berdasarkan data [NAMA] dan juga tampilan OLAP yang di integrasikan dengan Mondrian</p>
+                <p>Dashboard ini akan menampilkan beberapa grafik berdasarkan data dari ADVUAS dan juga tampilan OLAP yang di integrasikan dengan Mondrian</p>
                
                 
                
