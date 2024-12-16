@@ -19,7 +19,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/styleGraph.css">
-
+    
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
@@ -32,17 +32,19 @@
 <body id="page-top">
 
 <?php 
-// Mengambil data dari file PHP
-include 'data4.php';
+//data barchart
+include 'data5.php';
+// include 'data6.php';
 
-$data4 = json_decode($data4, TRUE);
+$data5 = json_decode($data5, TRUE);
+// $data6 = json_decode($data6, TRUE);
 ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include "sidebar.php"; ?>
+        <?php include "sidebar.php";?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -53,12 +55,11 @@ $data4 = json_decode($data4, TRUE);
 
                 <!-- Begin Page Content -->
                 
-                <div id="donutchart" class="grafik"></div>
+                <div id="piechart" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan data jumlah customer dari setiap kategori.
+                Berikut merupakan grafik untuk menampilkan data pendapatan dari setiap kategori.
                 </p>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 
@@ -84,46 +85,36 @@ $data4 = json_decode($data4, TRUE);
     </a>
 
     <script type="text/javascript">
-        // Validasi data sebelum digunakan
-        const data4 = <?php echo json_encode($data4); ?>;
+        // Data dari PHP
+        var dataPie = <?php echo json_encode($data5); ?>;
 
-        const donutchartData = data4.map(item => ({
-            name: item.kategori,
-            y: parseInt(item.pelanggan)
-        }));
+        console.log("Data Pie Chart:", dataPie);
+        console.log("Data Pie Chart Length:", dataPie.length);
 
-        // Render Donutchart dengan Highcharts
-        Highcharts.chart('donutchart', {
+        // Pastikan nilai 'y' adalah angka
+        dataPie.forEach(function(item) {
+            item.y = parseFloat(item.y); // Mengonversi 'y' menjadi angka
+        });
+
+        console.log("Data setelah konversi:", dataPie);
+
+        // Pie Chart
+        Highcharts.chart('piechart', {
             chart: {
                 type: 'pie'
             },
             title: {
-                text: 'Jumlah Pelanggan dari Setiap Kategori Film'
-            },
-            subtitle: {
-                text: 'Source: Database advuas'
-            },
-            accessibility: {
-                point: {
-                    valueSuffix: '%'
-                }
-            },
-            plotOptions: {
-                pie: {
-                    innerSize: '50%',
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.name}: {point.y} orang'
-                    }
-                }
+                text: 'Pendapatan Berdasarkan Kategori'
             },
             series: [{
-                name: 'Jumlah Pelanggan',
+                name: 'Pendapatan',
                 colorByPoint: true,
-                data: donutchartData
+                data: dataPie
             }]
         });
+
     </script>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -134,6 +125,7 @@ $data4 = json_decode($data4, TRUE);
 
     <!-- Custom scripts for all pages-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/js/sb-admin-2.min.js"></script>
+
 
 </body>
 

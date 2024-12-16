@@ -96,7 +96,7 @@ $data4 = json_decode($data4, TRUE);
                 type: 'column'
             },
             title: {
-                text: 'Jumlah Pelanggan dari Setiap Kategori Film'
+                text: 'Jumlah Pelanggan dari Setiap Kategori'
             },
             subtitle: {
                 text: 'Source: Database advuas'
@@ -105,7 +105,7 @@ $data4 = json_decode($data4, TRUE);
                 categories: categories,
                 crosshair: true,
                 title: {
-                    text: 'Kategori Film'
+                    text: 'Kategori Produk'
                 }
             },
             yAxis: {

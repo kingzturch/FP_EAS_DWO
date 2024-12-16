@@ -56,7 +56,7 @@ $data2 = json_decode($data2, TRUE);
                 <!-- Begin Page Content -->
                 <div id="barchart" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan pendapatan dari setiap Toko berdasarkan nama kota.
+                Berikut merupakan grafik untuk menampilkan pendapatan dari setiap Toko berdasarkan wilayah.
                 </p>
                 <!-- /.container-fluid -->
 
@@ -99,7 +99,7 @@ $data2 = json_decode($data2, TRUE);
             xAxis: {
                 type: 'category',
                 title: {
-                    text: 'Nama Toko'
+                    text: 'Wilayah'
                 }
             },
             yAxis: {
