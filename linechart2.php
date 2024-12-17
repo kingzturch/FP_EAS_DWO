@@ -11,11 +11,15 @@
     <title>Dashboard Adventure Work</title>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"
+        type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/styleGraph.css">
 
@@ -29,11 +33,11 @@
 
 <body id="page-top">
 
-<?php 
-// Mengambil data dari data7.php
-include 'data7.php';
-$data7 = json_decode($data7, TRUE);
-?>
+    <?php
+    // Mengambil data dari data7.php
+    include 'data7.php';
+    $data7 = json_decode($data7, TRUE);
+    ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -94,7 +98,7 @@ $data7 = json_decode($data7, TRUE);
             xAxis: {
                 categories: [
                     <?php foreach ($data7 as $item): ?>
-                        '<?= $item["bulan"] ?>',
+                            '<?= $item["bulan"] ?>',
                     <?php endforeach; ?>
                 ],
                 title: {
@@ -115,7 +119,7 @@ $data7 = json_decode($data7, TRUE);
                 }
             },
             series: [
-                <?php 
+                <?php
                 // Mengelompokkan data berdasarkan kategori
                 $categories = [];
                 foreach ($data7 as $data) {
@@ -123,12 +127,14 @@ $data7 = json_decode($data7, TRUE);
                 }
 
                 foreach ($categories as $kategori => $penjualanList): ?>
-                    {
+            {
                         name: '<?= $kategori ?>',
-                        data: [<?= implode(',', $penjualanList) ?>]
+                        data: [<?= implode(',', $penjualanList) ?>],
+                        visible: false // Menyembunyikan seri saat pertama kali chart dimuat
                     },
                 <?php endforeach; ?>
             ]
+
         });
     </script>
 

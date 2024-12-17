@@ -33,7 +33,16 @@
 // Mengambil data dari data3.php
 include 'data3.php';
 $data3 = json_decode($data3, TRUE);
+
+// Mengurutkan data berdasarkan jumlah penjualan tertinggi
+usort($data3, function ($a, $b) {
+    return $b['jumlah'] <=> $a['jumlah']; // Urut descending berdasarkan 'jumlah'
+});
+
+// Mengambil 10 data teratas
+$data3 = array_slice($data3, 0, 10);
 ?>
+
 
     <!-- Page Wrapper -->
     <div id="wrapper">
