@@ -120,7 +120,6 @@
             },
             series: [
                 <?php
-                // Mengelompokkan data berdasarkan kategori
                 $categories = [];
                 foreach ($data7 as $data) {
                     $categories[$data['kategori']][] = $data['penjualan'];
@@ -130,7 +129,7 @@
             {
                         name: '<?= $kategori ?>',
                         data: [<?= implode(',', $penjualanList) ?>],
-                        visible: false // Menyembunyikan seri saat pertama kali chart dimuat
+                        visible: false 
                     },
                 <?php endforeach; ?>
             ]
