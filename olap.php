@@ -12,14 +12,18 @@
     <title>Dashboard Adventure Work</title>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"
+        type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/styleGraph.css">
-    
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
@@ -27,45 +31,56 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: fix;
-            flex-direction: column;
-        }
-        #wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: row; /* Sidebar dan konten sejajar horizontal */
-        }
-        #content-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        iframe {
-            width: 100%;
-            height: calc(80vh - 80px); /* Kurangi untuk header dan footer */
-            border: none;
-        }
-        .sticky-footer {
-            height: 60px;
-        }
-        .sidebar {
-            min-width: 250px; /* Lebar minimum sidebar */
-            max-width: 250px;
-            background-color: #f8f9fc; /* Warna sidebar */
-        }
-        .content {
-            flex: 1;
-            padding: 20px;
-        }
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        display: fix;
+        flex-direction: column;
+    }
+
+    #wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        /* Sidebar dan konten sejajar horizontal */
+    }
+
+    #content-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    iframe {
+        width: 100%;
+        height: calc(80vh - 80px);
+        /* Kurangi untuk header dan footer */
+        border: none;
+    }
+
+    .sticky-footer {
+        height: 60px;
+    }
+
+    .sidebar {
+        min-width: 250px;
+        /* Lebar minimum sidebar */
+        max-width: 250px;
+        background-color: #f8f9fc;
+        /* Warna sidebar */
+    }
+
+    .content {
+        flex: 1;
+        padding: 20px;
+    }
     </style>
 </head>
 
 <body id="page-top">
 
-<?php 
+    <?php 
 //data barchart
 include 'data5.php';
 include 'data6.php';
@@ -88,7 +103,7 @@ $data6 = json_decode($data6, TRUE);
             <div id="content">
                 <!-- Begin Page Content -->
                 <p class="highcharts-description">
-                Berikut merupakan tampilan OLAP yang di integrasikan dengan Mondrian.
+                    Berikut merupakan tampilan OLAP yang di integrasikan dengan Mondrian.
                 </p>
                 <!-- /.container-fluid -->
                 <br>
@@ -101,7 +116,7 @@ $data6 = json_decode($data6, TRUE);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard DWO Kelompok 3</span>
+                        <span>Copyright &copy; Dashboard DWO</span>
                     </div>
                 </div>
             </footer>

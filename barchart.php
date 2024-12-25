@@ -12,11 +12,15 @@
     <title>Dashboard Adventure Work</title>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"
+        type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/styleGraph.css">
 
@@ -31,7 +35,7 @@
 
 <body id="page-top">
 
-<?php 
+    <?php 
 //data barchart
 include 'data.php';
 include 'data2.php';
@@ -56,7 +60,7 @@ $data2 = json_decode($data2, TRUE);
                 <!-- Begin Page Content -->
                 <div id="barchart" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan pendapatan dari setiap Toko berdasarkan wilayah.
+                    Berikut merupakan grafik untuk menampilkan pendapatan dari setiap Toko berdasarkan wilayah.
                 </p>
                 <!-- /.container-fluid -->
 
@@ -67,7 +71,7 @@ $data2 = json_decode($data2, TRUE);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard DWO Kelompok 3</span>
+                        <span>Copyright &copy; Dashboard DWO</span>
                     </div>
                 </div>
             </footer>
@@ -86,59 +90,58 @@ $data2 = json_decode($data2, TRUE);
 
     <script type="text/javascript">
     // Create the barchart
-        Highcharts.chart('barchart', {
-            chart: {
-                type: 'column'
-            },
+    Highcharts.chart('barchart', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Pendapatan Setiap Toko'
+        },
+        subtitle: {
+            text: 'Source: Database advuas'
+        },
+        xAxis: {
+            type: 'category',
             title: {
-                text: 'Pendapatan Setiap Toko'
-            },
-            subtitle: {
-                text: 'Source: Database advuas'
-            },
-            xAxis: {
-                type: 'category',
-                title: {
-                    text: 'Wilayah'
+                text: 'Wilayah'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Pendapatan (USD)'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.2f}$'
                 }
-            },
-            yAxis: {
-                title: {
-                    text: 'Pendapatan (USD)'
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            plotOptions: {
-                series: {
-                    borderWidth: 0,
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.y:.2f}$'
-                    }
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>'
-            },
-            series: [{
-                name: "Toko",
-                colorByPoint: true,
-                data: [
-                    <?php foreach ($data as $toko): ?>
-                    {
-                        name: '<?= $toko["name"] ?>',
-                        y: <?= $toko["total"] ?>,
-                        drilldown: '<?= $toko["name"] ?>'
-                    },
-                    <?php endforeach; ?>
-                ]
-            }],
-            drilldown: {
-                series: [
-                    <?php 
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>'
+        },
+        series: [{
+            name: "Toko",
+            colorByPoint: true,
+            data: [
+                <?php foreach ($data as $toko): ?> {
+                    name: '<?= $toko["name"] ?>',
+                    y: <?= $toko["total"] ?>,
+                    drilldown: '<?= $toko["name"] ?>'
+                },
+                <?php endforeach; ?>
+            ]
+        }],
+        drilldown: {
+            series: [
+                <?php 
                     $drilldown = [];
 
                     // Mengelompokkan data drilldown per toko
@@ -146,16 +149,15 @@ $data2 = json_decode($data2, TRUE);
                         $drilldown[$item['kategori']][] = [$item['bulan'], floatval($item['pendapatan'])];
                     }
 
-                    foreach ($drilldown as $toko => $data): ?>
-                    {
-                        name: "<?= $toko ?>",
-                        id: "<?= $toko ?>",
-                        data: <?= json_encode($data) ?>
-                    },
-                    <?php endforeach; ?>
-                ]
-            }
-        });
+                    foreach ($drilldown as $toko => $data): ?> {
+                    name: "<?= $toko ?>",
+                    id: "<?= $toko ?>",
+                    data: <?= json_encode($data) ?>
+                },
+                <?php endforeach; ?>
+            ]
+        }
+    });
     </script>
 
     <!-- Bootstrap core JavaScript-->

@@ -4,7 +4,7 @@
      <!-- Sidebar - Brand -->
      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
          <div class="sidebar-brand-icon rotate-n-15">
-         <i class="fas fa-bicycle"></i>
+             <i class="fas fa-database"></i>
          </div>
          <div class="sidebar-brand-text mx-3">ADVENTURE WORK</div>
      </a>
@@ -20,57 +20,63 @@
      <!-- Nav Item - My Profile -->
      <li class="nav-item">
          <a class="nav-link" href="linechart.php">
-         <i class="fas fa-shopping-cart"></i>
+             <i class="fas fa-trophy"></i>
              <span>Data Barang Terlaris</span></a>
      </li>
 
      <li class="nav-item">
          <a class="nav-link" href="linechart2.php">
-         <i class="far fa-clock"></i>
+             <i class="fas fa-th-large"></i>
              <span>Data Bulanan Setiap Kategori</span></a>
      </li>
 
      <!-- Nav Item - Edit Profile -->
      <li class="nav-item">
          <a class="nav-link" href="barchart.php">
-         <i class="fas fa-money-bill"></i>
+             <i class="fas fa-coins"></i>
              <span>Data Pendapatan Toko</span></a>
      </li>
 
      <!-- Nav Item - Edit Profile -->
      <li class="nav-item">
          <a class="nav-link" href="barchart2.php">
-         <i class="fas fa-tasks"></i>
+             <i class="fas fa-users"></i>
              <span>Data Jumlah Customer dari Setiap Kategori</span></a>
      </li>
 
-          <!-- Nav Item - Edit Profile -->
-    <li class="nav-item">
+     <!-- Nav Item - Edit Profile -->
+     <li class="nav-item">
          <a class="nav-link" href="donatchart.php">
-         <i class="fas fa-money-bill-alt"></i>
+             <i class="fas fa-chart-pie"></i>
              <span>Data Pendapatan dari Setiap Kategori</span></a>
      </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+     <!-- Nav Item - Edit Profile -->
+     <!-- <li class="nav-item">
+         <a class="nav-link" href="donatchart2.php">
+             <i class="fas fa-money-bill-alt"></i>
+             <span>Data Sales dari Setiap Kategori</span></a>
+     </li> -->
+     <!-- Divider -->
+     <hr class="sidebar-divider">
 
-    <!-- Heading User Profile-->
-    <div class="sidebar-heading">
-        OLAP
-    </div>
+     <!-- Heading User Profile-->
+     <div class="sidebar-heading">
+         OLAP
+     </div>
 
-    <!-- Nav Item - My Profile -->
-    <li class="nav-item">
-        <a class="nav-link" href="olap.php">
-        <i class="fas fa-database"></i>
-            <span>Mondrian</span></a>
-    </li>
+     <!-- Nav Item - My Profile -->
+     <li class="nav-item">
+         <a class="nav-link" href="olap.php">
+             <i class="fas fa-ruler"></i>
+             <span>Mondrian</span></a>
+     </li>
      <!-- Heading Data Customer-->
 
-          <!-- Divider -->
-          <hr class="sidebar-divider d-none d-md-block">
+     <!-- Divider -->
+     <hr class="sidebar-divider d-none d-md-block">
 
- 
+
      <!-- Nav Item - Logout -->
      <li class="nav-item">
          <a class="nav-link" href="index.php">

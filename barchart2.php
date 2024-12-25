@@ -12,11 +12,15 @@
     <title>Dashboard Adventure Work</title>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"
+        type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/styleGraph.css">
 
@@ -31,7 +35,7 @@
 
 <body id="page-top">
 
-<?php 
+    <?php 
 // Mengambil data dari file PHP
 include 'data4.php';
 
@@ -52,10 +56,10 @@ $data4 = json_decode($data4, TRUE);
             <div id="content">
 
                 <!-- Begin Page Content -->
-                
+
                 <div id="barchart2" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan data jumlah customer dari setiap kategori.
+                    Berikut merupakan grafik untuk menampilkan data jumlah customer dari setiap kategori.
                 </p>
                 <!-- /.container-fluid -->
 
@@ -66,7 +70,7 @@ $data4 = json_decode($data4, TRUE);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard DWO Kelompok 3</span>
+                        <span>Copyright &copy; Dashboard DWO </span>
                     </div>
                 </div>
             </footer>
@@ -84,55 +88,55 @@ $data4 = json_decode($data4, TRUE);
     </a>
 
     <script type="text/javascript">
-        // Validasi data sebelum digunakan
-        const data4 = <?php echo json_encode($data4); ?>;
+    // Validasi data sebelum digunakan
+    const data4 = <?php echo json_encode($data4); ?>;
 
-        const categories = data4.map(item => item.kategori);
-        const pelanggan = data4.map(item => parseInt(item.pelanggan));
+    const categories = data4.map(item => item.kategori);
+    const pelanggan = data4.map(item => parseInt(item.pelanggan));
 
-        // Render Barchart dengan Highcharts
-        Highcharts.chart('barchart2', {
-            chart: {
-                type: 'column'
-            },
+    // Render Barchart dengan Highcharts
+    Highcharts.chart('barchart2', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Jumlah Pelanggan dari Setiap Kategori'
+        },
+        subtitle: {
+            text: 'Source: Database advuas'
+        },
+        xAxis: {
+            categories: categories,
+            crosshair: true,
             title: {
-                text: 'Jumlah Pelanggan dari Setiap Kategori'
-            },
-            subtitle: {
-                text: 'Source: Database advuas'
-            },
-            xAxis: {
-                categories: categories,
-                crosshair: true,
-                title: {
-                    text: 'Kategori Produk'
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Jumlah Pelanggan (orang)'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y} orang</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Jumlah Pelanggan',
-                data: pelanggan
-            }]
-        });
+                text: 'Kategori Produk'
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Jumlah Pelanggan (orang)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y} orang</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Jumlah Pelanggan',
+            data: pelanggan
+        }]
+    });
     </script>
 
     <!-- Bootstrap core JavaScript-->

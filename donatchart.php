@@ -12,14 +12,18 @@
     <title>Dashboard Adventure Work</title>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"
+        type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/styleGraph.css">
-    
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
@@ -31,13 +35,13 @@
 
 <body id="page-top">
 
-<?php 
+    <?php 
 //data barchart
 include 'data5.php';
-// include 'data6.php';
+// include 'data5.php';
 
 $data5 = json_decode($data5, TRUE);
-// $data6 = json_decode($data6, TRUE);
+// $data5 = json_decode($data6, TRUE);
 ?>
 
     <!-- Page Wrapper -->
@@ -54,10 +58,10 @@ $data5 = json_decode($data5, TRUE);
             <div id="content">
 
                 <!-- Begin Page Content -->
-                
+
                 <div id="piechart" class="grafik"></div>
                 <p class="highcharts-description">
-                Berikut merupakan grafik untuk menampilkan data pendapatan dari setiap kategori.
+                    Berikut merupakan grafik untuk menampilkan data pendapatan dari setiap kategori.
                 </p>
                 <!-- /.container-fluid -->
             </div>
@@ -67,7 +71,7 @@ $data5 = json_decode($data5, TRUE);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard DWO Kelompok 3</span>
+                        <span>Copyright &copy; Dashboard DWO</span>
                     </div>
                 </div>
             </footer>
@@ -85,34 +89,33 @@ $data5 = json_decode($data5, TRUE);
     </a>
 
     <script type="text/javascript">
-        // Data dari PHP
-        var dataPie = <?php echo json_encode($data5); ?>;
+    // Data dari PHP
+    var dataPie = <?php echo json_encode($data5); ?>;
 
-        console.log("Data Pie Chart:", dataPie);
-        console.log("Data Pie Chart Length:", dataPie.length);
+    console.log("Data Pie Chart:", dataPie);
+    console.log("Data Pie Chart Length:", dataPie.length);
 
-        // Pastikan nilai 'y' adalah angka
-        dataPie.forEach(function(item) {
-            item.y = parseFloat(item.y); // Mengonversi 'y' menjadi angka
-        });
+    // Pastikan nilai 'y' adalah angka
+    dataPie.forEach(function(item) {
+        item.y = parseFloat(item.y); // Mengonversi 'y' menjadi angka
+    });
 
-        console.log("Data setelah konversi:", dataPie);
+    console.log("Data setelah konversi:", dataPie);
 
-        // Pie Chart
-        Highcharts.chart('piechart', {
-            chart: {
-                type: 'pie'
-            },
-            title: {
-                text: 'Pendapatan Berdasarkan Kategori'
-            },
-            series: [{
-                name: 'Pendapatan',
-                colorByPoint: true,
-                data: dataPie
-            }]
-        });
-
+    // Pie Chart
+    Highcharts.chart('piechart', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Pendapatan Berdasarkan Kategori'
+        },
+        series: [{
+            name: 'Pendapatan',
+            colorByPoint: true,
+            data: dataPie
+        }]
+    });
     </script>
 
 

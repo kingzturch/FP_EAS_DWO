@@ -12,14 +12,18 @@
     <title>Dashboard ADVENTURE WORK</title>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"
+        type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
     <!-- Custom styles for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.min.css"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/styleGraph.css">
-    
+
 </head>
 
 <body id="page-top">
@@ -36,25 +40,51 @@
 
             <!-- Main Content -->
             <div id="content">
+                <style>
+                h2 {
+                    font-size: 2.5rem;
+                    margin-bottom: 10px;
+                    text-transform: uppercase;
+                    letter-spacing: 4px;
+                    font-weight: bold;
+                }
+
+                .names {
+                    margin-top: 20px;
+                    font-size: 1.1rem;
+                    font-style: italic;
+                    font-weight: 600;
+                }
+
+                .highlight {
+                    color: rgb(27, 7, 82);
+                }
+                </style>
 
                 <!-- Begin Page Content -->
                 <h2>W E L C O M E !</h2>
-                <p>Welcome to Dashboard ADVENTURE WORK</p>
-                <p>Dashboard ini akan menampilkan beberapa grafik berdasarkan data dari ADVUAS dan juga tampilan OLAP yang di integrasikan dengan Mondrian</p>
-               
-                
-               
+                <p>Final Projek DWO</p>
+                <p class="names">
+                    <span class="highlight">Alfathur Robbani</span> (22082010194) /
+                    <span class="highlight">Muhammad Rafli Alfarisqi</span> (22082010213)
+                </p>
+                <p>
+                    Dashboard ini akan menampilkan beberapa grafik berdasarkan data dari <strong>ADVUAS</strong>
+                    dan juga tampilan OLAP yang diintegrasikan dengan <strong>Mondrian</strong>.
+                </p>
+
+
+
 
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
-
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard DWO Kelompk 3</span>
+                        <span>Copyright &copy; Dashboard DWO</span>
                     </div>
                 </div>
             </footer>
@@ -72,7 +102,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -107,7 +138,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </body>
 

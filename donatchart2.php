@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,27 +30,25 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 </head>
 
 <body id="page-top">
 
     <?php 
-include 'data3.php';
-$data3 = json_decode($data3, TRUE);
+//data barchart
+include 'data8.php';
+// include 'data8.php';
 
-usort($data3, function ($a, $b) {
-    return $b['jumlah'] <=> $a['jumlah']; 
-});
-
-$data3 = array_slice($data3, 0, 10);
+$data5 = json_decode($data5, TRUE);
+// $data8 = json_decode($data6, TRUE);
 ?>
-
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include "sidebar.php"; ?>
+        <?php include "sidebar.php";?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -59,9 +58,10 @@ $data3 = array_slice($data3, 0, 10);
             <div id="content">
 
                 <!-- Begin Page Content -->
-                <div id="linechart" class="grafik"></div>
+
+                <div id="piechart" class="grafik"></div>
                 <p class="highcharts-description">
-                    Berikut merupakan grafik untuk menampilkan produk terlaris pada Adventure Work.
+                    Berikut merupakan grafik untuk menampilkan data Sales dari setiap kategori.
                 </p>
                 <!-- /.container-fluid -->
             </div>
@@ -71,7 +71,7 @@ $data3 = array_slice($data3, 0, 10);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard DWO</span>
+                        <span>Copyright &copy; Dashboard DWO Kelompok 3</span>
                     </div>
                 </div>
             </footer>
@@ -88,39 +88,36 @@ $data3 = array_slice($data3, 0, 10);
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Script untuk membuat line chart -->
     <script type="text/javascript">
-    // Membuat line chart
-    Highcharts.chart('linechart', {
+    // Data dari PHP
+    var dataPie = <?php echo json_encode($data5); ?>;
+
+    console.log("Data Pie Chart:", dataPie);
+    console.log("Data Pie Chart Length:", dataPie.length);
+
+    // Pastikan nilai 'y' adalah angka
+    dataPie.forEach(function(item) {
+        item.y = parseFloat(item.y); // Mengonversi 'y' menjadi angka
+    });
+
+    console.log("Data setelah konversi:", dataPie);
+
+    // Pie Chart
+    Highcharts.chart('piechart', {
         chart: {
-            type: 'line' // Jenis grafik line
+            type: 'pie'
         },
         title: {
-            text: 'Barang Terlaris' // Judul grafik
-        },
-        subtitle: {
-            text: 'Source: Database advuas' // Sumber data
-        },
-        xAxis: {
-            categories: <?php echo json_encode(array_column($data3, 'barang')); ?>, // Nama produk untuk kategori sumbu X
-            title: {
-                text: 'Nama Barang' // Nama sumbu X
-            }
-        },
-        yAxis: {
-            title: {
-                text: 'Jumlah Terjual' // Nama sumbu Y
-            }
-        },
-        tooltip: {
-            valueSuffix: ' unit' // Satuan yang ditampilkan di tooltip
+            text: 'Data Sales Setiap Kategori'
         },
         series: [{
-            name: 'Jumlah Terjual',
-            data: <?php echo json_encode(array_column($data3, 'jumlah')); ?> // Data jumlah penjualan
+            name: 'Pendapatan',
+            colorByPoint: true,
+            data: dataPie
         }]
     });
     </script>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -131,6 +128,7 @@ $data3 = array_slice($data3, 0, 10);
 
     <!-- Custom scripts for all pages-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/js/sb-admin-2.min.js"></script>
+
 
 </body>
 

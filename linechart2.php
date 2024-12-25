@@ -65,7 +65,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard DWO Kelompok 3</span>
+                        <span>Copyright &copy; Dashboard DWO</span>
                     </div>
                 </div>
             </footer>
@@ -84,57 +84,55 @@
 
     <!-- Script untuk membuat line chart -->
     <script type="text/javascript">
-        // Membuat line chart
-        Highcharts.chart('linechart', {
-            chart: {
-                type: 'line'
-            },
+    // Membuat line chart
+    Highcharts.chart('linechart', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Data Penjualan Setiap Kategori Produk'
+        },
+        subtitle: {
+            text: 'Source: Database advuas'
+        },
+        xAxis: {
+            categories: [
+                <?php foreach ($data7 as $item): ?> '<?= $item["bulan"] ?>',
+                <?php endforeach; ?>
+            ],
             title: {
-                text: 'Data Penjualan Setiap Kategori Produk'
-            },
-            subtitle: {
-                text: 'Source: Database advuas'
-            },
-            xAxis: {
-                categories: [
-                    <?php foreach ($data7 as $item): ?>
-                            '<?= $item["bulan"] ?>',
-                    <?php endforeach; ?>
-                ],
-                title: {
-                    text: 'Bulan'
-                }
-            },
-            yAxis: {
-                title: {
-                    text: 'Jumlah Penjualan'
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: true
-                }
-            },
-            series: [
-                <?php
+                text: 'Bulan'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah Penjualan'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: true
+            }
+        },
+        series: [
+            <?php
                 $categories = [];
                 foreach ($data7 as $data) {
                     $categories[$data['kategori']][] = $data['penjualan'];
                 }
 
-                foreach ($categories as $kategori => $penjualanList): ?>
-            {
-                        name: '<?= $kategori ?>',
-                        data: [<?= implode(',', $penjualanList) ?>],
-                        visible: false 
-                    },
-                <?php endforeach; ?>
-            ]
+                foreach ($categories as $kategori => $penjualanList): ?> {
+                name: '<?= $kategori ?>',
+                data: [<?= implode(',', $penjualanList) ?>],
+                visible: false
+            },
+            <?php endforeach; ?>
+        ]
 
-        });
+    });
     </script>
 
     <!-- Bootstrap core JavaScript-->
