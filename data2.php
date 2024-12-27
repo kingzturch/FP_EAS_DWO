@@ -1,11 +1,11 @@
 <?php
 require 'koneksi.php';
 
-$sql1 = "SELECT s.teritoryname AS kategori,
+$sql1 = "SELECT s.TerritoryName AS kategori,
                 t.bulan AS bulan,
                 SUM(fp.SalesAmount) AS pendapatan
          FROM dimsalesterritory s
-         JOIN factsales fp ON s.teritoryid = fp.TerritoryID
+         JOIN factsales fp ON s.TerritoryID = fp.TerritoryID
          JOIN dimtime t ON fp.TimeID = t.timeID
          GROUP BY kategori, bulan
          ORDER BY kategori, bulan";
