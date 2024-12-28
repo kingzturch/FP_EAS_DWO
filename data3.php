@@ -36,6 +36,14 @@ if (mysqli_num_rows($result1) > 0) {
     echo "No data found.";
 }
 
+// Sorting data secara PHP (ini opsional karena sudah diurutkan di SQL)
+usort($barangTerlaris, function($a, $b) {
+    return $b['jumlah'] <=> $a['jumlah'];
+});
+
+// Membatasi hanya 10 barang terlaris
+$barangTerlaris = array_slice($barangTerlaris, 0, 10);
+
 // Mengencode hasil ke format JSON
 $data3 = json_encode($barangTerlaris);
 ?>

@@ -1,22 +1,22 @@
 <?php
 require('koneksi.php');
 
-$sql = "SELECT p.productcategory AS kategori, 
-            SUM(fp.SalesAmount) AS total, 
-            (SUM(fp.Salesamount) / (SELECT SUM(SalesAmount) FROM factsales)) * 100 AS persentase
-            FROM dimproduct p 
-            JOIN factsales fp ON p.productID = fp.productID
-            GROUP BY p.productcategory";
+$sql = "SELECT e.EmployeeName AS nama_karyawan,
+SUM(fp.SalesAmount) AS total,
+(SUM(fp.SalesAmount) / (SELECT SUM(SalesAmount) FROM factsales)) * 100 AS persentase
+FROM dimemployee e
+JOIN factsales fp ON e.EmployeeID = fp.EmployeeID
+GROUP BY e.EmployeeName";
 $result = mysqli_query($conn, $sql);
 
 $hasil = array();
 
 while ($row = mysqli_fetch_array($result)) {
 array_push($hasil, array(
-"name" => $row['kategori'],
+"name" => $row['nama_karyawan'],
 "total" => $row['total'],
 "y" => $row['persentase']
 ));
 }
 
-$data5 = json_encode($hasil);
+$data8 = json_encode($hasil);

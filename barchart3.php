@@ -37,11 +37,11 @@
 
     <?php 
 //data barchart
-include 'data8.php';
-// include 'data8.php';
+include 'data9.php';
+include 'data10.php';
 
-$data8 = json_decode($data8, TRUE);
-// $data8 = json_decode($data6, TRUE);
+$data = json_decode($data9, TRUE);
+$data2 = json_decode($data10, TRUE);
 ?>
 
     <!-- Page Wrapper -->
@@ -58,12 +58,12 @@ $data8 = json_decode($data8, TRUE);
             <div id="content">
 
                 <!-- Begin Page Content -->
-
-                <div id="piechart" class="grafik"></div>
+                <div id="barchart" class="grafik"></div>
                 <p class="highcharts-description">
-                    Berikut merupakan grafik untuk menampilkan data Sales berdasarkan Pendapatan.
+                    Berikut merupakan grafik untuk menampilkan Produk dari dari Setiap Kategori.
                 </p>
                 <!-- /.container-fluid -->
+
             </div>
             <!-- End of Main Content -->
 
@@ -71,7 +71,7 @@ $data8 = json_decode($data8, TRUE);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dashboard DWO </span>
+                        <span>Copyright &copy; Dashboard DWO</span>
                     </div>
                 </div>
             </footer>
@@ -89,36 +89,85 @@ $data8 = json_decode($data8, TRUE);
     </a>
 
     <script type="text/javascript">
-    // Data dari PHP
-    var dataPie = <?php echo json_encode($data8); ?>;
+    // Data utama (kategori)
+    var dataKategori = <?php echo $data9; ?>;
 
-    console.log("Data Pie Chart:", dataPie);
-    console.log("Data Pie Chart Length:", dataPie.length);
+    // Data drilldown (produk)
+    var dataDrilldown = <?php echo $data10; ?>;
 
-    // Pastikan nilai 'y' adalah angka
-    dataPie.forEach(function(item) {
-        item.y = parseFloat(item.y); // Mengonversi 'y' menjadi angka
+    // Mengelompokkan data drilldown berdasarkan kategori
+    var groupedDrilldown = {};
+    dataDrilldown.forEach(function(item) {
+        if (!groupedDrilldown[item.kategori]) {
+            groupedDrilldown[item.kategori] = [];
+        }
+        groupedDrilldown[item.kategori].push([item.produk, parseFloat(item.pendapatan)]);
     });
 
-    console.log("Data setelah konversi:", dataPie);
+    // Siapkan data drilldown untuk Highcharts
+    var drilldownSeries = [];
+    for (var kategori in groupedDrilldown) {
+        drilldownSeries.push({
+            name: kategori,
+            id: kategori,
+            data: groupedDrilldown[kategori]
+        });
+    }
 
-    // Pie Chart
-    Highcharts.chart('piechart', {
+    // Highcharts Bar Chart
+    Highcharts.chart('barchart', {
         chart: {
-            type: 'pie'
+            type: 'column'
         },
         title: {
-            text: 'Pendapatan Berdasarkan Karyawan'
+            text: 'Pendapatan Setiap Kategori Produk'
+        },
+        subtitle: {
+            text: 'Klik untuk melihat detail produk'
+        },
+        xAxis: {
+            type: 'category',
+            title: {
+                text: 'Kategori Produk'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Pendapatan (USD)'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.2f}$'
+                }
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>'
         },
         series: [{
-            name: 'Pendapatan',
+            name: "Kategori",
             colorByPoint: true,
-            data: dataPie
-        }]
+            data: dataKategori.map(function(item) {
+                return {
+                    name: item.name,
+                    y: parseFloat(item.total),
+                    drilldown: item.name
+                };
+            })
+        }],
+        drilldown: {
+            series: drilldownSeries
+        }
     });
     </script>
-
-
 
 
     <!-- Bootstrap core JavaScript-->
@@ -130,7 +179,6 @@ $data8 = json_decode($data8, TRUE);
 
     <!-- Custom scripts for all pages-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/js/sb-admin-2.min.js"></script>
-
 
 </body>
 

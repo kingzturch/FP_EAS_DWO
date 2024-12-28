@@ -36,6 +36,12 @@
              <i class="fas fa-coins"></i>
              <span>Data Pendapatan Toko</span></a>
      </li>
+     <!-- Nav Item - Edit Profile -->
+     <li class="nav-item">
+         <a class="nav-link" href="barchart3.php">
+             <i class="fas fa-cubes"></i>
+             <span>Data Produk</span></a>
+     </li>
 
      <!-- Nav Item - Edit Profile -->
      <li class="nav-item">
@@ -45,18 +51,18 @@
      </li>
 
      <!-- Nav Item - Edit Profile -->
-     <li class="nav-item">
+     <!-- <li class="nav-item">
          <a class="nav-link" href="donatchart.php">
              <i class="fas fa-chart-pie"></i>
              <span>Data Pendapatan dari Setiap Kategori</span></a>
-     </li>
+     </li> -->
 
      <!-- Nav Item - Edit Profile -->
-     <!-- <li class="nav-item">
+     <li class="nav-item">
          <a class="nav-link" href="donatchart2.php">
-             <i class="fas fa-money-bill-alt"></i>
-             <span>Data Sales dari Setiap Kategori</span></a>
-     </li> -->
+             <i class="fas fa-cart-arrow-down"></i>
+             <span>Data Pendapatan Setiap Sales</span></a>
+     </li>
      <!-- Divider -->
      <hr class="sidebar-divider">
 
