@@ -1,5 +1,5 @@
 # FP_DWO
-Final Project Pengembangan Data Warehouse dan Dashboard Adaventure Work 2019<br/>
+Final Project Pengembangan Data Warehouse dan Dashboard AdaventureWork 2019<br/>
 Program Studi Sistem Informasi <br/>
 Fakultas Ilmu Komputer <br/>
 UPN "Veteran" Jawa Timur<br/>
