@@ -33,14 +33,14 @@
      <!-- Nav Item - Edit Profile -->
      <li class="nav-item">
          <a class="nav-link" href="barchart.php">
-             <i class="fas fa-coins"></i>
-             <span>Data Pendapatan Toko</span></a>
+             <i class="fas fa-map-marker-alt"></i>
+             <span>Data Pendapatan Setiap Wilayah</span></a>
      </li>
      <!-- Nav Item - Edit Profile -->
      <li class="nav-item">
          <a class="nav-link" href="barchart3.php">
-             <i class="fas fa-cubes"></i>
-             <span>Data Produk</span></a>
+             <i class="fas fa-box-open"></i>
+             <span>Data Pendapatan Setiap Produk</span></a>
      </li>
 
      <!-- Nav Item - Edit Profile -->
@@ -60,7 +60,7 @@
      <!-- Nav Item - Edit Profile -->
      <li class="nav-item">
          <a class="nav-link" href="donatchart2.php">
-             <i class="fas fa-cart-arrow-down"></i>
+             <i class="fas fa-user-tie"></i>
              <span>Data Pendapatan Setiap Sales</span></a>
      </li>
      <!-- Divider -->

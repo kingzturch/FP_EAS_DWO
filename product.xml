@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<Schema name="advuas">
+<!--
+  == This software is subject to the terms of the Eclipse Public License v1.0
+  == Agreement, available at the following URL:
+  == http://www.eclipse.org/legal/epl-v10.html.
+  == You must accept the terms of that agreement to use this software.
+  ==
+  == Copyright (C) 2000-2005 Julian Hyde
+  == Copyright (C) 2005-2011 Pentaho and others
+  == All Rights Reserved.
+  -->
+
+<!-- Shared dimensions -->
+
+  
+
+<!-- Sales -->
+  <Cube name="Sales" defaultMeasure="Sales Amount">
+    <Table name="factsales"/>
+
+    <!-- Time Dimension -->
+    <Dimension name="Time" foreignKey="TimeID">
+      <Hierarchy hasAll="true" allMemberName="All Time" primaryKey="TimeID">
+        <Table name="dimtime"/>
+        <Level name="Year" column="tahun" type="Numeric" uniqueMembers="true" levelType="TimeYears"/>
+        <Level name="Month" column="bulan" type="Numeric" uniqueMembers="false" levelType="TimeMonths"/>
+        <Level name="Date" column="tanggal" type="Numeric" uniqueMembers="false" levelType="TimeDays"/>
+      </Hierarchy>
+    </Dimension>
+
+    <!-- Product Dimension -->
+    <Dimension name="Product" foreignKey="ProductID">
+      <Hierarchy hasAll="true" allMemberName="All Products" primaryKey="ProductID">
+        <Table name="dimproduct"/>
+        <Level name="Product Name" column="productname" uniqueMembers="true"/>
+      </Hierarchy>
+    </Dimension>
+
+    <!-- Territory Dimension -->
+    <Dimension name="Territory" foreignKey="TerritoryID">
+      <Hierarchy hasAll="true" allMemberName="All Territories" primaryKey="TerritoryID">
+        <Table name="dimsalesterritory"/>
+        <Level name="Group" column="groupterritory"/>
+        <Level name="Country" column="countryregioncode"/>
+        <Level name="Territory Name" column="territoryname"/>
+      </Hierarchy>
+    </Dimension>
+
+    <!-- Measures -->
+    <Measure name="Sales Amount" column="SalesAmount" aggregator="sum" formatString="Currency"/>
+
+  </Cube>
+
+
+
+</Schema>

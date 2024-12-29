@@ -1,0 +1,174 @@
+-- Membuat database advuas
+CREATE DATABASE advuas;
+
+-- Menggunakan database advuas
+USE advuas;
+
+-- Membuat tabel dimcustomer
+CREATE TABLE dimcustomer (
+    CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+    CustomerName VARCHAR(100) NOT NULL,
+    CustomerType VARCHAR(50) NOT NULL
+);
+
+-- Membuat tabel dimemployee
+CREATE TABLE dimemployee (
+    EmployeeID INT PRIMARY KEY AUTO_INCREMENT,
+    EmployeeName VARCHAR(100) NOT NULL,
+    MaritalStatus VARCHAR(20),
+    Gender VARCHAR(1) DEFAULT NULL,
+    Age INT CHECK (Age >= 18)
+);
+
+-- Membuat tabel dimproduct
+CREATE TABLE dimproduct (
+    ProductID INT PRIMARY KEY AUTO_INCREMENT,
+    ProductName VARCHAR(100) NOT NULL,
+    ProductCategory VARCHAR(50)
+);
+
+-- Membuat tabel dimsalesterritory
+CREATE TABLE dimsalesterritory (
+    TerritoryID INT PRIMARY KEY AUTO_INCREMENT,
+    TerritoryName VARCHAR(100) NOT NULL
+);
+
+-- Membuat tabel dimtime
+CREATE TABLE dimtime (
+    TimeID INT PRIMARY KEY AUTO_INCREMENT,
+    Tahun INT NOT NULL,
+    Bulan TINYINT NOT NULL,
+    Tanggal TINYINT NOT NULL,
+    TanggalLengkap DATE NOT NULL,
+    HariEnglish VARCHAR(20),
+    HariIndo VARCHAR(20),
+    HariJawa VARCHAR(20)
+);
+
+-- Membuat tabel factsales
+CREATE TABLE factsales (
+    SalesID INT PRIMARY KEY AUTO_INCREMENT,
+    ProductID INT NOT NULL,
+    TimeID INT NOT NULL,
+    EmployeeID INT NOT NULL,
+    CustomerID INT NOT NULL,
+    TerritoryID INT NOT NULL,
+    SalesAmount DECIMAL(15, 2) NOT NULL,
+    FOREIGN KEY (ProductID) REFERENCES dimproduct(ProductID),
+    FOREIGN KEY (TimeID) REFERENCES dimtime(TimeID),
+    FOREIGN KEY (EmployeeID) REFERENCES dimemployee(EmployeeID),
+    FOREIGN KEY (CustomerID) REFERENCES dimcustomer(CustomerID),
+    FOREIGN KEY (TerritoryID) REFERENCES dimsalesterritory(TerritoryID)
+);
+
+
+dimtime
+
+DELIMITER $$
+
+CREATE PROCEDURE isiDimTime(
+    IN waktuMulai DATE,
+    IN waktuSelesai DATE,
+    IN hariPasarPertama ENUM('legi', 'pahing', 'pon', 'wage', 'kliwon')
+)
+BEGIN
+    DECLARE hariPasarSaatIni ENUM('legi', 'pahing', 'pon', 'wage', 'kliwon') DEFAULT hariPasarPertama;
+
+    WHILE waktuMulai <= waktuSelesai DO
+        INSERT INTO dimtime (tahun, bulan, tanggal, tanggallengkap, harienglish, hariindo, harijawa)
+        VALUES (
+            YEAR(waktuMulai), -- Tahun dari tanggal
+            MONTH(waktuMulai), -- Bulan dari tanggal
+            DAY(waktuMulai), -- Tanggal dari tanggal
+            waktuMulai, -- Tanggal lengkap
+            DAYNAME(waktuMulai), -- Nama hari dalam bahasa Inggris
+            CASE DAYOFWEEK(waktuMulai) -- Nama hari dalam bahasa Indonesia
+                WHEN 1 THEN 'Minggu'
+                WHEN 2 THEN 'Senin'
+                WHEN 3 THEN 'Selasa'
+                WHEN 4 THEN 'Rabu'
+                WHEN 5 THEN 'Kamis'
+                WHEN 6 THEN 'Jumat'
+                WHEN 7 THEN 'Sabtu'
+            END,
+            hariPasarSaatIni -- Hari pasar Jawa saat ini
+        );
+
+        -- Tambah satu hari ke waktuMulai
+        SET waktuMulai = DATE_ADD(waktuMulai, INTERVAL 1 DAY);
+
+        -- Perbarui hari pasar
+        SET hariPasarSaatIni = CASE
+            WHEN hariPasarSaatIni = 'legi' THEN 'pahing'
+            WHEN hariPasarSaatIni = 'pahing' THEN 'pon'
+            WHEN hariPasarSaatIni = 'pon' THEN 'wage'
+            WHEN hariPasarSaatIni = 'wage' THEN 'kliwon'
+            WHEN hariPasarSaatIni = 'kliwon' THEN 'legi'
+        END;
+    END WHILE;
+END$$
+
+DELIMITER ;
+
+CALL isiDimTime('2023-01-01', '2023-01-31', 'legi');
+
+
+dimcustomer
+
+INSERT INTO advuas.dimcustomer (CustomerID, CustomerName, CustomerType)
+SELECT 
+    c.CustomerID, 
+    CONCAT_WS(' ', p.FirstName, p.MiddleName, p.LastName) AS CustomerName,
+    p.PersonType AS CustomerType
+FROM 
+    AdventureWork2019.sales_customer c
+JOIN 
+    AdventureWork2019.person_person p
+ON 
+    c.PersonID = p.BusinessEntityID;
+
+
+dimemployee
+
+INSERT INTO advuas.dimemployee (EmployeeID, EmployeeName, MaritalStatus, Gender, Age)
+SELECT 
+    p.BusinessEntityID AS EmployeeID, 
+    CONCAT_WS(' ', p.FirstName, p.MiddleName, p.LastName) AS EmployeeName,
+    h.MaritalStatus,
+    h.Gender,
+    YEAR('2024-01-01') - YEAR(h.BirthDate) AS Age
+FROM 
+    AdventureWork2019.person_person p
+JOIN 
+    AdventureWork2019.humanresources_employee h
+ON 
+    p.BusinessEntityID = h.BusinessEntityID
+WHERE 
+    p.PersonType = 'SP' 
+
+     
+dimproduct
+
+INSERT INTO advuas.dimproduct (ProductID, ProductName, ProductCategory)
+SELECT 
+    p.ProductID, 
+    p.Name AS ProductName, 
+    c.Name AS ProductCategory
+FROM 
+    AdventureWork2019.production_product p
+LEFT JOIN 
+    AdventureWork2019.production_productsubcategory s
+    ON p.ProductSubcategoryID = s.ProductSubcategoryID
+LEFT JOIN 
+    AdventureWork2019.production_productcategory c
+    ON s.ProductCategoryID = c.ProductCategoryID;
+
+dimsalesterritory
+
+INSERT INTO advuas.dimsalesterritory (TerritoryID, TerritoryName)
+SELECT 
+    t.TerritoryID, 
+    t.Name AS TerritoryName
+FROM 
+    adventurework2019.sales_salesterritory t;
+

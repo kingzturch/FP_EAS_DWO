@@ -98,7 +98,7 @@ $data2 = json_decode($data2, TRUE);
             text: 'Pendapatan Setiap Toko Berdasarkan Wilayah'
         },
         subtitle: {
-            text: 'Source: Database advuas'
+            text: 'Klik untuk melihat detail Penjualan'
         },
         xAxis: {
             type: 'category',
